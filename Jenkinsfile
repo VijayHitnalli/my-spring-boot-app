@@ -17,7 +17,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t vijay2021/my-spring-app:latest .'
+                sh 'docker build -t vijayhitnalli/my-spring-app:latest .'
             }
         }
         
@@ -26,7 +26,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
                     // Using single quotes (') around the command makes it more stable
                     sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
-                    sh 'docker push vijay2021/my-spring-app:latest'
+                    sh 'docker push vijayhitnalli/my-spring-app:latest'
                 }
             }
         }
