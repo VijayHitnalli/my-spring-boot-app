@@ -21,12 +21,12 @@ pipeline {
             }
         }
         
-        stage('Push to Docker Hub') {
+       stage('Push to Docker Hub') {
             steps {
-                // This block uses the 'ID' you created in Jenkins Credentials
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
-                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
-                    sh "docker push vijay2021/my-spring-app:latest"
+                    // Using single quotes (') around the command makes it more stable
+                    sh 'docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD'
+                    sh 'docker push vijay2021/my-spring-app:latest'
                 }
             }
         }
