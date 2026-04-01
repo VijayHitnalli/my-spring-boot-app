@@ -30,5 +30,14 @@ pipeline {
                 sh 'docker push vijay2021/my-spring-app:latest'
             }
         }
+        stage('Push to Docker Hub') {
+            steps {
+                // This 'withCredentials' block handles the login automatically
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'Vijay@1743', usernameVariable: 'vijay2021')]) {
+                    sh "docker login -u ${vijay2021} -p ${Vijay@1743}"
+                    sh "docker push vijay2021/my-spring-app:latest"
+                }
+            }
+        }
     }
 }
